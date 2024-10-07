@@ -49,6 +49,7 @@ export default function Board() {
   // design-what we see on the screen
   return (
     <>
+    <h1>TicTacToe</h1>
     <div className="status">{status}</div>
     <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
