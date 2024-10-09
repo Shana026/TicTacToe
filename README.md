@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Tic-Tac-Toe Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project is a Tic-Tac-Toe game built with React. The game allows two players to play Tic-Tac-Toe, tracks the game’s history, and lets users review and jump back to previous moves.
 
-In the project directory, you can run:
+### Features
 
-### `npm start`
+- Play a classic 3x3 Tic-Tac-Toe game.
+- Player Turn Indicator: The game displays whose turn it is (either "X" or "O").
+- Winner Announcement: Once a player wins, the game announces the winner and highlights the winning combination.
+- Game History: As the game progresses, a move history is recorded.
+- Time Travel: Players can go back and view previous board states or resume the game from a past move.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+To run this project locally, follow these steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- Node.js (version 14.x or later)
+- npm or yarn
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Steps
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository: `git clone <https://github.com/Shana026/TicTacToe>`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Navigate to the project directory: `cd tic-tac-toe`
+ 
+3. Install the dependencies: `npm install`
 
-### `npm run eject`
+4. Start the development server: `npm start`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+5. Open your browser and navigate to: `http://localhost:3000`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## How to Play
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Players take turns placing their mark ("X" or "O") on the 3x3 grid.
+- The game will automatically switch turns after each valid move.
+- The winner is determined when a player aligns three of their marks horizontally, vertically, or diagonally.
+- If all squares are filled without a winner, the game ends in a draw.
+- You can use the list of moves (displayed on the right side) to "time travel" through previous moves and review the game’s history.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Code Structure
 
-## Learn More
+The project is composed of three main components:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Square Component
+- Represents a single square on the Tic-Tac-Toe board.
+- Handles user clicks to place a mark.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. Board Component
+- Represents the Tic-Tac-Toe board, composed of 9 Square components.
+- Handles game logic, including tracking turns and checking for a winner.
 
-### Code Splitting
+3. Game Component
+- Manages the overall game state, including the game’s history and the current move.
+- Allows players to review the game’s history and jump back to previous moves.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  ### Enjoy !
