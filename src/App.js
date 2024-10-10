@@ -3,30 +3,30 @@ import './App.css';
 import { useState } from 'react';
 
 
-/***********************************************************************
+/***********************************************************************************
  Component Square - represents a square in the board
  Gets prop value - the value of the square
  Gets prop onSquareClick - a function to call when the square is clicked
- Return: a button that displays the square's value and calls
- onSquareClick when clicked 
-***********************************************************************/
-function Square({ value, onSquareClick }) {
+ Gets prop highlight - a boolean to highlight the square if it is in the winning line
+ Return: a button that displays the square's value and calls onSquareClick when clicked 
+***********************************************************************************/
+function Square({ value, onSquareClick, highlight }) {
   return (
-    <button className="square" onClick={onSquareClick}>
+    <button className={`square ${highlight ? "highlight" : ""}`} onClick={onSquareClick}>
       {value}
     </button>
   );
 }
 
 
-/************************************************************************
+/***********************************************************************************
  Component Board - represents the board of the game - 9 squares
  Gets prop xIsNext - whether it's X's turn or O's turn
  Gets prop squares - the current state of the board, current squares value
  Gets prop onPlay - a function to call when a square is clicked to update
  the game
  Return: a board made up of 9 squares, title, player's turn or the winner
-************************************************************************/
+***********************************************************************************/
 function Board({ xIsNext, squares, onPlay }) {
 
   // function that do something if the square is clicked
@@ -45,11 +45,20 @@ function Board({ xIsNext, squares, onPlay }) {
     onPlay(nextSquares);
   }
 
-  // displays player's turn or the winner
-  const winner = calculateWinner(squares);
+  // check if there is a winner - if winnerData is null there is no winner
+  // else there is a winner
+  // if there is a winner, highlights the winnering squares
+  const winnerData = calculateWinner(squares);
+  const winner = winnerData ? winnerData.winner : null;
+  const winningLine = winnerData ? winnerData.line : [];
+
+  // displays or player's turn or the winner or a draw
   let status;
   if (winner) {
     status = "Winner: " + winner;
+    // there is a draw when there is no winner and the board is filled
+  } else if (squares.every(Boolean)) {
+    status = "It's a draw!";
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
@@ -60,30 +69,31 @@ function Board({ xIsNext, squares, onPlay }) {
     <h1>TicTacToe</h1>
     <div className="status">{status}</div>
     <div className="board-row">
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+    <Square value={squares[0]} onSquareClick={() => handleClick(0)} highlight={winningLine.includes(0)} />
+        <Square value={squares[1]} onSquareClick={() => handleClick(1)} highlight={winningLine.includes(1)} />
+        <Square value={squares[2]} onSquareClick={() => handleClick(2)} highlight={winningLine.includes(2)} />
       </div>
       <div className="board-row">
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
+        <Square value={squares[3]} onSquareClick={() => handleClick(3)} highlight={winningLine.includes(3)} />
+        <Square value={squares[4]} onSquareClick={() => handleClick(4)} highlight={winningLine.includes(4)} />
+        <Square value={squares[5]} onSquareClick={() => handleClick(5)} highlight={winningLine.includes(5)} />
       </div>
       <div className="board-row">
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+        <Square value={squares[6]} onSquareClick={() => handleClick(6)} highlight={winningLine.includes(6)} />
+        <Square value={squares[7]} onSquareClick={() => handleClick(7)} highlight={winningLine.includes(7)} />
+        <Square value={squares[8]} onSquareClick={() => handleClick(8)} highlight={winningLine.includes(8)} />
       </div>
   </>
   );
 }
 
 
-/************************************************************************
+
+/***********************************************************************************
  Component Game - represents a game, contains the board, the game's infos
  and history
  Return: a game with a board and some info about the game
-************************************************************************/
+***********************************************************************************/
 export default function Game() {
 
   // list of past moves
@@ -124,28 +134,38 @@ export default function Game() {
     } else {
       description = 'Go to game start';
     }
-    return (
-      // the key of each element is the move number
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
-      </li>
-    );
+    // Check if this is the current move
+    if (move === currentMove) {
+      return (
+        <li key={move}>
+          <p>You are at move {move}</p>
+        </li>
+      );
+    } else {
+      return (
+        // the key of each element is the move number
+        <li key={move}>
+          <button onClick={() => jumpTo(move)}>{description}</button>
+        </li>
+      );
+    }
   });
 
   return (
     <div className="game">
       <div className="game-board">
-      <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
-      <ol>{moves}</ol>
+        <ol className="no-numbers">{moves}</ol>
       </div>
     </div>
   );
 }
 
-// check if there's a winner or not and returns it
+// check if there's a winner and if yes returns it and the winning line
 function calculateWinner(squares) {
+  // all winning combinations
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -159,7 +179,7 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return { winner: squares[a], line: [a, b, c] };
     }
   }
   return null;
