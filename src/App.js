@@ -66,7 +66,6 @@ function Board({ xIsNext, squares, onPlay }) {
   // design-what we see on the screen
   return (
     <>
-    <h1>TicTacToe</h1>
     <div className="status">{status}</div>
     <div className="board-row">
     <Square value={squares[0]} onSquareClick={() => handleClick(0)} highlight={winningLine.includes(0)} />
@@ -153,11 +152,14 @@ export default function Game() {
 
   return (
     <div className="game">
-      <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-      </div>
-      <div className="game-info">
-        <ol className="no-numbers">{moves}</ol>
+      <h1>Tic Tac Toe</h1>
+      <div className="game-box"> {/* container for board and moves */}
+        <div className="game-board">
+          <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+        </div>
+        <div className="game-info">
+          <ol className="no-numbers">{moves}</ol>
+        </div>
       </div>
     </div>
   );

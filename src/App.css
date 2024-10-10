@@ -4,77 +4,51 @@
 
 body {
   font-family: sans-serif;
-  margin: 10px;
+  margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center; /* Centers the entire game horizontally */
+  align-items: center;     /* Centers the entire game vertically */
+  height: 100vh;           /* Full screen height */
+  background-color: #f4f4f9;
 }
 
 h1 {
-  margin-top: 0;
-  font-size: 22px;
+  font-family: cursive;
+  margin: 0;
+  font-size: 50px;
+  text-align: center; /* Centers the title horizontally */
+  color: #000d73; /* Sets color for the title */
+  margin-bottom: 80px; /* Adds some space below the title */
 }
 
-h2 {
-  margin-top: 0;
-  font-size: 20px;
+.status {
+  font-family: cursive;
+  margin-bottom: 40px;
+  font-size: 25px;
+  color: black;
 }
 
-h3 {
-  margin-top: 0;
-  font-size: 18px;
+/* Game component */
+.game {
+  display: flex;
+  flex-direction: column; /* Stacks items vertically */
+  align-items: center; /* Centers items horizontally */
 }
 
-h4 {
-  margin-top: 0;
-  font-size: 16px;
+.game-box {
+  display: flex; /* Uses flexbox to arrange board and history side by side */
+  align-items: flex-start; /* Aligns items at the start of the flex container */
+  justify-content: center; /* Centers items horizontally within the flex container */
+  padding: 70px; /*Adds space inside the container to make it look balanced*/
+  background-color: #fff;
+  border-radius: 10px; /* Rounds the corners of the game container*/
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /*Adds a soft shadow around the game*/
 }
 
-h5 {
-  margin-top: 0;
-  font-size: 14px;
-}
-
-h6 {
-  margin-top: 0;
-  font-size: 12px;
-}
-
-code {
-  font-size: 1.2em;
-}
-
-ul {
-  padding-inline-start: 20px;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: sans-serif;
-  margin: 20px;
-  padding: 0;
-}
-
-/* Square component */
-.square {
-  background: #fff;
-  border: 3px solid #000d73;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 150px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  width: 150px;
-}
-
-/* Highlight the square */
-.highlight { 
-  background-color: yellow;
+/* Board component */
+.game-board {
+  margin-right: 40px; /* Add space between the board and the move history */
 }
 
 .board-row:after {
@@ -83,24 +57,59 @@ body {
   display: table;
 }
 
-.status {
-  margin-bottom: 10px;
+/* Square component */
+.square {
+  background: #fff;
+  border: 3px solid #000d73;
+  float: left;
+  font-size: 50px; /* Size of the text in the square */
+  font-weight: bold;
+  line-height: 34px;
+  height: 150px;
+  width: 150px;
+  text-align: center;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  cursor: pointer; /* Changes the cursor to a pointer when hovering over squares */
+  color: black; /* Set text color for "X" and "O" */
+  font-family: cursive;
 }
 
-/* Game component */
-.game {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centers child elements horizontally */
-  padding: 100px; /* Padding inside the game container */
-  background-color: #fff; /* White background */
+.square:hover {
+  background-color: #eaeaea; /* Make the square turn light gray when the user hovers over it */
 }
 
+/* Highlight the square */
+.highlight {
+  background-color: yellow;
+}
+
+/* Game-info (history move) */
 .game-info {
   margin-left: 20px;
 }
 
-.no-numbers {
-  list-style-type: none; /* Removes the default list styling (numbers or bullets) */
+.no-numbers { /*Removes bullet points or numbers from the move history list*/
+  list-style-type: none;
+  padding: 0;
 }
 
+.no-numbers li {
+  margin: 10px 0;
+}
+
+button {
+  background-color: #000d73;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
