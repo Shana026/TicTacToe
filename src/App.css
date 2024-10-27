@@ -10,7 +10,9 @@ body {
   justify-content: center; /* Centers the entire game horizontally */
   align-items: center;     /* Centers the entire game vertically */
   height: 100vh;           /* Full screen height */
-  background-color: #f4f4f9;
+  background-color: #f7f1f5;
+  /*background-color: #f4f4f9; */
+
 }
 
 h1 {
@@ -18,7 +20,7 @@ h1 {
   margin: 0;
   font-size: 50px;
   text-align: center; /* Centers the title horizontally */
-  color: #000d73; /* Sets color for the title */
+  color: #333; /* Sets color for the title */
   margin-bottom: 80px; /* Adds some space below the title */
 }
 
@@ -27,6 +29,7 @@ h1 {
   margin-bottom: 40px;
   font-size: 25px;
   color: black;
+  font-weight: bold;
 }
 
 /* Game component */
@@ -44,6 +47,10 @@ h1 {
   background-color: #fff;
   border-radius: 10px; /* Rounds the corners of the game container*/
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /*Adds a soft shadow around the game*/
+  background-image: url('background1.jpg');
+  background-size: cover; /* Cover the entire background */
+  background-repeat: no-repeat; /* Prevent repetition */
+  background-position: center; /* Center the image */
 }
 
 /* Board component */
@@ -87,7 +94,10 @@ h1 {
 
 /* Game-info (history move) */
 .game-info {
-  margin-left: 20px;
+  margin-left: 50px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
 }
 
 .no-numbers { /*Removes bullet points or numbers from the move history list*/
@@ -100,8 +110,8 @@ h1 {
 }
 
 button {
-  background-color: #000d73;
-  color: white;
+  background-color: #7983f0;
+  color: #fff;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;

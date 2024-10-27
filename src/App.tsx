@@ -53,7 +53,7 @@ function Board({ xIsNext, squares, onPlay }) {
   const winningLine = winnerData ? winnerData.line : [];
 
   // displays or player's turn or the winner or a draw
-  let status;
+  let status: string;
   if (winner) {
     status = "The winner is : " + winner;
     // there is a draw when there is no winner and the board is filled
@@ -125,7 +125,7 @@ export default function Game() {
   // for each move in the game, it returns a <li> element containing a button
   // that has an onClick handler which calls the function jumpTo 
   const moves = history.map((squares, move) => {
-    let description;
+    let description: string;
     // Move is the index of the current item in the history array, representing 
     // how many moves have been made so far
     if (move > 0) {
