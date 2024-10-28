@@ -31,8 +31,8 @@ function Board({ xIsNext, squares, onPlay }) {
 
   // function that do something if the square is clicked
   function handleClick(i) {
-    // check if the choosen square is already selected and if there is a winner
-    if (squares[i] || calculateWinner(squares)) {
+    let choosenSquare = squares[i]
+    if (choosenSquare || checkWinner(squares)) {
       return;
     }
     const nextSquares = squares.slice(); // copy of squares array
@@ -48,9 +48,8 @@ function Board({ xIsNext, squares, onPlay }) {
   // check if there is a winner - if winnerData is null there is no winner
   // else there is a winner
   // if there is a winner, highlights the winnering squares
-  const winnerData = calculateWinner(squares);
-  const winner = winnerData ? winnerData.winner : null;
-  const winningLine = winnerData ? winnerData.line : [];
+  const winner = checkWinner(squares);
+  const winningLine = checkWinningLine(squares);
 
   // displays or player's turn or the winner or a draw
   let status;
@@ -165,24 +164,30 @@ export default function Game() {
   );
 }
 
-// check if there's a winner and if yes returns it and the winning line
-function calculateWinner(squares) {
-  // all winning combinations
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return { winner: squares[a], line: [a, b, c] };
-    }
+const possibleWinningLines = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6]
+];
+
+function checkWinningLine(squares){
+    for (let i = 0; i < possibleWinningLines.length; i++) {
+      const [a, b, c] = possibleWinningLines[i];
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        return [a, b, c];
+      }
+    }  
+  return [];
+}
+function checkWinner(squares) {
+  let winningLine = checkWinningLine(squares);
+  if (winningLine.length > 0) {
+    return squares[winningLine[0]]
   }
   return null;
 }
