@@ -184,6 +184,7 @@ function checkWinningLine(squares){
     }  
   return [];
 }
+
 function checkWinner(squares) {
   let winningLine = checkWinningLine(squares);
   if (winningLine.length > 0) {
